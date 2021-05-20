@@ -1,9 +1,9 @@
-import './stylesheets/App.css';
-import ButtonAppBar from "./Components/ButtonAppBar/";
-import React, {useState} from 'react'
-import {AuthForm} from './Components/Forms';
-import {Register} from './Pages/Register'
-function App() {
-  return (<Register></Register>)
+import React from 'react';
+import './App.css';
+import SignIn from './Components/Form/SignIn';
+
+function App(): JSX.Element {
+  return <SignIn />;
 }
+
 export default App;
