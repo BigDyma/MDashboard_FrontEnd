@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-curly-brace-presence */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
@@ -15,8 +16,9 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Formik, Field, Form } from 'formik';
+import { SnackbarProvider, useSnackbar } from 'notistack';
 import { authSchema } from '../../Models/authModels';
-import login from '../../Services/Auth/login';
+import { login } from '../../Services/Auth/login';
 
 function Copyright() {
   return (
@@ -50,9 +52,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function SignIn(): JSX.Element {
+const SignIn = function (): JSX.Element {
   const classes = useStyles();
-
+  const { enqueueSnackbar } = useSnackbar();
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -71,7 +73,13 @@ export default function SignIn(): JSX.Element {
           }}
           onSubmit={async (values) => {
             // empty
-            await login(values);
+            try {
+              await login(values);
+            } catch (e) {
+              enqueueSnackbar('wrong password or username', {
+                variant: 'error'
+              });
+            }
           }}
         >
           {(props) => (
@@ -123,8 +131,8 @@ export default function SignIn(): JSX.Element {
             </Link>
           </Grid>
           <Grid item>
-            <Link href="/register" variant="body2">
-              {" Don't have an account? Sign Up"}
+            <Link href="/SignUp" variant="body2">
+              {"Don't have an account? Sign up!"}
             </Link>
           </Grid>
         </Grid>
@@ -134,4 +142,6 @@ export default function SignIn(): JSX.Element {
       </Box>
     </Container>
   );
-}
+};
+
+export default SignIn;

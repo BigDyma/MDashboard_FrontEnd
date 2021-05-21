@@ -3,24 +3,23 @@ import * as Yup from 'yup';
 
 export const authSchema = Yup.object().shape({
   userName: Yup.string().required('Please enter username'),
-  password: Yup.string()
-    .required()
-    .matches(
-      /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-      'Password must contain at least 8 characters, one uppercase, one number and one special case character'
-    )
+  password: Yup.string().required()
+  // .matches(
+  //   /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+  //   'Password must contain at least 8 characters, one uppercase, one number and one special case character'
+  // )
 });
 
 export const registerSchema = Yup.object().shape({
-  fullName: Yup.string().required('Please enter full name'),
+  firstName: Yup.string().required('Please enter first name'),
+  lastName: Yup.string().required('Please enter last name'),
   userName: Yup.string().required('Please enter username'),
   email: Yup.string().email().required('Please enter email address'),
-  password: Yup.string()
-    .required()
-    .matches(
-      /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
-      'Password must contain at least 8 characters, one uppercase, one number and one special case character'
-    ),
+  password: Yup.string().required(),
+  // .matches(
+  //   /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+  //   'Password must contain at least 8 characters, one uppercase, one number and one special case character'
+  // ),
   confirmPassword: Yup.string()
     .required('Please confirm your password')
     .oneOf([Yup.ref('password'), null], "Passwords don't match.")
@@ -29,16 +28,16 @@ export const registerSchema = Yup.object().shape({
     })
 });
 
-export interface IUserBase {
-  fullName: string;
+export interface IRegisterRequest {
+  firstName: string;
+  lastName: string;
   userName: string;
   email: string;
-}
-
-export interface IRegisterRequest extends IUserBase {
   password: string;
 }
 
-export interface IRegisterModel extends IRegisterRequest {
-  confirmPassword: string;
+export interface IJWToken {
+  token?: string;
+  error?: string;
+  statusText?: string;
 }
