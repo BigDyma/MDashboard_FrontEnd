@@ -11,7 +11,9 @@ function App(): JSX.Element {
   return (
     <SnackbarProvider maxSnack={3}>
       <CssBaseline />
-      <RouterPages />
+      <RouterPages>
+        {(content: any, routeProps: any) => <>{content}</>}
+      </RouterPages>
     </SnackbarProvider>
   );
 }

@@ -1,10 +1,9 @@
+/* eslint-disable import/extensions */
 /* eslint-disable react/jsx-curly-brace-presence */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-// import TextField from '@material-ui/core/TextField';
 import { TextField } from 'formik-material-ui';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -18,7 +17,8 @@ import { Formik, Field, Form } from 'formik';
 import {  useSnackbar } from 'notistack';
 import {Redirect, useHistory} from "react-router-dom";
 import { authSchema } from '../../Models/authModels';
-import { login, isLogged } from '../../Services/Auth/login';
+import { login } from '../../Services/Auth/Login';
+import isLogged from '../../Services/Auth/Login/_isLogged';
 import Copyright from '../../Components/Footer';
 import useStyles from './_style';
 

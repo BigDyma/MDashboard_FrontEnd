@@ -35,4 +35,3 @@ export const logout = async () => {
       userSubjectBehavior.removeUserSubject();
     }
   }
-

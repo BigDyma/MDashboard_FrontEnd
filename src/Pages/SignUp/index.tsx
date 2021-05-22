@@ -13,8 +13,8 @@ import { Formik, Field, Form } from 'formik';
 import {  useSnackbar } from 'notistack';
 import {Redirect, useHistory} from "react-router-dom";
 import { registerSchema } from '../../Models/authModels';
-import register from '../../Services/Auth/register';
-import {isLogged} from '../../Services/Auth/login';
+import register from '../../Services/Auth/Register/register';
+import isLogged from '../../Services/Auth/Login/_isLogged';
 import Copyright from '../../Components/Footer';
 import useStyles from './_style';
 

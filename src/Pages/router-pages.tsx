@@ -1,20 +1,43 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { GuardProvider, GuardedRoute } from 'react-router-guards';
+import requireLogin from '../Services/Guard/_requireLogin';
+import getRoutes from '../Services/Guard/_routes';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
+import NotFound from './NotFound';
 
- const RouterPages = (): JSX.Element => 
-     ( 
-     <BrowserRouter>
-        <Switch>
-            <Route exact path="/SignIn">
-                <SignIn />
-            </Route>
-            <Route exact path="/SignUp">
-                <SignUp />
-            </Route>
-        </Switch>
-      </BrowserRouter>
-      )
+const GUARDS = [requireLogin];
+
+const RouterPages = ({children}:any): JSX.Element => 
+  { 
+    const routes = useMemo(() => getRoutes(), []);
+    return ( 
+    <BrowserRouter>
+    <GuardProvider guards={GUARDS} >
+    <Route
+          render={routeProps =>
+            children(
+              <Switch>
+                {routes.map(({ component, error, exact, ignoreGlobal, loading, meta, path }, i) => (
+                  <GuardedRoute
+                    key={i}
+                    component={component}
+                    exact={exact}
+                    error={error}
+                    ignoreGlobal={ignoreGlobal}
+                    loading={loading}
+                    meta={meta}
+                    path={path}
+                  />
+                ))} 
+              </Switch>,
+              routeProps,
+            )
+          }
+        />
+    </GuardProvider>
+    </BrowserRouter>
+    )}
 
 export default RouterPages;
