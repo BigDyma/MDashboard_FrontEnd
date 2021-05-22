@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { SnackbarProvider, useSnackbar } from 'notistack';
+import { SnackbarProvider } from 'notistack';
 import CssBaseline from '@material-ui/core/CssBaseline';
 // eslint-disable-next-line import/no-cycle
 import RouterPages from './router-pages';

@@ -1,6 +1,5 @@
-import { exception } from 'console';
 // eslint-disable-next-line import/no-cycle
-import { logout } from '../Auth/login';
+import { logout } from '../Auth/Login';
 
 /* eslint-disable no-restricted-globals */
 function IsJsonString(str: string) {
