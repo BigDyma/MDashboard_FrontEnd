@@ -5,7 +5,7 @@ const userSubject = {
 }
 
 const userSubjectBehavior = {
-    currentUserValue() {
+    currentUserValue():any {
         return userSubject.currentUserSubject.value;
     },
     createUserSubject(token:string):void {

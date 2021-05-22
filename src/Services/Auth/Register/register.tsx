@@ -1,5 +1,6 @@
 import { IRegisterRequest } from '../../../Models/authModels';
-import handleResponse from '../../Helpers/handleRespons';
+import api from '../../axios-config';
+import {throwIfError} from '../../Helpers/throwCustomException';
 
 const register = async (values: IRegisterRequest): Promise<any> => {
   const fullName = `${values.firstName} ${values.lastName}`;
@@ -8,19 +9,8 @@ const register = async (values: IRegisterRequest): Promise<any> => {
   const { firstName, lastName, ...parsedValues } = values;
   const queryJSON = { fullName, ...parsedValues };
 
-  const options = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    'Access-Control-Allow-Origin': '*',
-    body: JSON.stringify(queryJSON)
-  };
-
-  const data = await fetch(`https://localhost:5001/Auth/register`, options);
-  const handledResult = await handleResponse(data);
-
-  if (handledResult.error) {
-    throw new Error(handledResult.error);
-  }
+  const data = await api().post(`/Auth/register`, queryJSON);
+  throwIfError(data)
 };
 
 export default register;
