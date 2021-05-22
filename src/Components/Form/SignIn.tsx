@@ -62,7 +62,6 @@ const SignIn = function (): JSX.Element {
   const { enqueueSnackbar } = useSnackbar();
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />

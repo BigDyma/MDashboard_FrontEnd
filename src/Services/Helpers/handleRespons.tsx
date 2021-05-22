@@ -14,8 +14,7 @@ function IsJsonString(str: string) {
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 async function handleResponse(response: Response) {
-  const text = await response.text();
-  const data = text;
+  const data = await response.text();
   if (!response.ok) {
     if ([401, 403].indexOf(response.status) !== -1) {
         logout();
