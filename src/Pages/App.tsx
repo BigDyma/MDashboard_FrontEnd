@@ -3,7 +3,7 @@ import './App.css';
 import { SnackbarProvider, useSnackbar } from 'notistack';
 import CssBaseline from '@material-ui/core/CssBaseline';
 // eslint-disable-next-line import/no-cycle
-import RouterPages from '../router-pages';
+import RouterPages from './router-pages';
 
 
 

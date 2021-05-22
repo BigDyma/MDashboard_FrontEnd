@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import SignIn from './Pages/SignIn';
-import SignUp from './Pages/SignUp';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
 
  const RouterPages = (): JSX.Element => 
      ( 
