@@ -19,7 +19,9 @@ export const login = async(values:ILogin):Promise<any> => {
     const handledResult: IJWToken = await handleResponse(result);
   
     if (handledResult.error) {
+      console.log(handledResult.statusText);
       throw new Error(handledResult.error);
+
     }
     if (handledResult.token) {
       console.log(handledResult.token);

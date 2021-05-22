@@ -1,11 +1,9 @@
+/* eslint-disable react/no-array-index-key */
 import React, {useMemo} from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { GuardProvider, GuardedRoute } from 'react-router-guards';
 import requireLogin from '../Services/Guard/_requireLogin';
 import getRoutes from '../Services/Guard/_routes';
-import SignIn from './SignIn';
-import SignUp from './SignUp';
-import NotFound from './NotFound';
 
 const GUARDS = [requireLogin];
 

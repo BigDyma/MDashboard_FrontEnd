@@ -12,7 +12,7 @@ function App(): JSX.Element {
     <SnackbarProvider maxSnack={3}>
       <CssBaseline />
       <RouterPages>
-        {(content: any, routeProps: any) => <>{content}</>}
+        {(content: JSX.Element, routeProps: any) => content}
       </RouterPages>
     </SnackbarProvider>
   );

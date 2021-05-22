@@ -51,7 +51,7 @@ const SignIn = function (): JSX.Element {
               await login(values);
               history.push('/'); 
             } catch (e) {
-              enqueueSnackbar('wrong password or username', {
+              enqueueSnackbar(e.toString(), {
                 variant: 'error'
               });
             }

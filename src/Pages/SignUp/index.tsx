@@ -53,7 +53,7 @@ export default function SignUp() {
               history.push('/SignIn');
 
             } catch (e) {
-              enqueueSnackbar('wrong password or username', {
+              enqueueSnackbar(e.toString(), {
                 variant: 'error'
               });
             }
