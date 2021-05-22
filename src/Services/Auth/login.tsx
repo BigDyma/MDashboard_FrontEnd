@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { BehaviorSubject } from 'rxjs';
+// eslint-disable-next-line import/no-cycle
 import handleResponse from '../Helpers/handleRespons';
 import { IJWToken } from '../../Models/authModels';
 
@@ -33,21 +34,30 @@ export const login = async (values: {
   }
 };
 
+export const isLogged = () =>{
+  const currentUser = currentUserSubject.value;
+  console.log (currentUserSubject.value.token);
+  return (currentUser && currentUser.token !== undefined);
+}
+
+
 const authHeader = () => {
   // return authorization header with jwt token
   const currentUser = currentUserSubject.value;
-  if (currentUser && currentUser.token) {
+  if (isLogged()) {
     return { Authorization: `Bearer ${currentUser.token}` };
   }
   return { Authorization: '' };
 };
 
 export const logout = async () => {
-  const requestOptions = { method: 'POST', headers: authHeader() };
-  await fetch(`https://localhost:5001/Auth/logout`, requestOptions);
-
-  localStorage.removeItem('token');
-  currentUserSubject.next(null);
+  if (isLogged()) {
+    const requestOptions = { method: 'POST', headers: authHeader() };
+    const res = await fetch(`https://localhost:5001/Auth/logout`, requestOptions);
+    await handleResponse(res);
+    localStorage.removeItem('token');
+    currentUserSubject.next(null);
+  }
 };
 
 export default {

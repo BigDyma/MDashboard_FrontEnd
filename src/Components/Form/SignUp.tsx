@@ -15,8 +15,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Formik, Field, Form } from 'formik';
 import { SnackbarProvider, useSnackbar } from 'notistack';
+import {Redirect} from "react-router-dom";
 import { registerSchema } from '../../Models/authModels';
 import register from '../../Services/Auth/register';
+import {isLogged} from '../../Services/Auth/login';
 
 function Copyright() {
   return (
@@ -53,6 +55,10 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp() {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
+
+  if (isLogged() === true)
+  return (<Redirect to="/" />)
+
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />

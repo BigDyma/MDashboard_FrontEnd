@@ -1,20 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { SnackbarProvider } from 'notistack';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import SignIn from './Components/Form/SignIn';
 import SignUp from './Components/Form/SignUp';
+import {isLogged} from './Services/Auth/login';
+
 
 ReactDOM.render(
   <BrowserRouter>
     <Switch>
-      <Route exact path="/SignIn">
+        <Route exact path="/SignIn">
+            <>
+              <SnackbarProvider maxSnack={3}>
+                <SignIn />
+              </SnackbarProvider>
+            </>
+        </Route>
+        <Route exact path="/SignUp">
+            <>
+              <SnackbarProvider maxSnack={3}>
+                <SignUp />
+              </SnackbarProvider>
+            </>
+        </Route>
+      <Route path="/">
         <App />
-      </Route>
-      <Route exact path="/SignUp">
-        <SignUp />
       </Route>
     </Switch>
   </BrowserRouter>,

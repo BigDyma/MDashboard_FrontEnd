@@ -17,8 +17,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Formik, Field, Form } from 'formik';
 import { SnackbarProvider, useSnackbar } from 'notistack';
+import {Redirect, useHistory} from "react-router-dom";
 import { authSchema } from '../../Models/authModels';
-import { login } from '../../Services/Auth/login';
+import { login, isLogged } from '../../Services/Auth/login';
 
 function Copyright() {
   return (
@@ -54,6 +55,10 @@ const useStyles = makeStyles((theme) => ({
 
 const SignIn = function (): JSX.Element {
   const classes = useStyles();
+  const history = useHistory();
+  if (isLogged() === true)
+    return (<Redirect to="/" />)
+
   const { enqueueSnackbar } = useSnackbar();
   return (
     <Container component="main" maxWidth="xs">
@@ -75,11 +80,13 @@ const SignIn = function (): JSX.Element {
             // empty
             try {
               await login(values);
+              history.push('/'); 
             } catch (e) {
               enqueueSnackbar('wrong password or username', {
                 variant: 'error'
               });
             }
+
           }}
         >
           {(props) => (

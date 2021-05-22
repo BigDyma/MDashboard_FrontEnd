@@ -1,14 +1,25 @@
 import React from 'react';
 import './App.css';
 import { SnackbarProvider, useSnackbar } from 'notistack';
-import SignIn from './Components/Form/SignIn';
+import { Redirect } from 'react-router-dom';
+import {isLogged} from './Services/Auth/login'
+
+
 
 function App(): JSX.Element {
-  return (
+
+
+
+  if (isLogged() === false)
+  {
+    return (
     <SnackbarProvider maxSnack={3}>
-      {' '}
-      <SignIn />
+        <Redirect from="/" to="/SignIn"/>
     </SnackbarProvider>
+    );
+  }
+  return (
+    <></>
   );
 }
 
