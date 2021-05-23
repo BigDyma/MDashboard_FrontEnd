@@ -24,7 +24,6 @@ const RouterPages = ({children}:any): JSX.Element =>
                     exact={exact}
                     error={error}
                     ignoreGlobal={ignoreGlobal}
-                    loading={loading}
                     meta={meta}
                     path={path}
                   />
