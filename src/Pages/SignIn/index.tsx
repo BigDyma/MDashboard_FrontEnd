@@ -26,9 +26,6 @@ const SignIn = function (): JSX.Element {
   const classes = useStyles();
   const history = useHistory();
 
-  if (isLogged() === true)
-    return (<Redirect to="/" />)
-
   const { enqueueSnackbar } = useSnackbar();
   return (
     <Container component="main" maxWidth="xs">

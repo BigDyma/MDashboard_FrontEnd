@@ -12,6 +12,7 @@ export const logout = async () => {
   if (isLogged()) {
     const res = await api().post(`/Auth/logout`);
     userSubjectBehavior.removeUserSubject();
+    window.location.reload();
   }
 }
 

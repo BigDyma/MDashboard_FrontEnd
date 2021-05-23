@@ -11,7 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { Formik, Field, Form } from 'formik';
 import {  useSnackbar } from 'notistack';
-import {Redirect, useHistory} from "react-router-dom";
+import {Redirect, useHistory } from "react-router-dom";
 import { registerSchema } from '../../Models/authModels';
 import register from '../../Services/Auth/Register/register';
 import isLogged from '../../Services/Auth/Login/_isLogged';
@@ -24,8 +24,6 @@ export default function SignUp() {
   const classes = useStyles();
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
-  if (isLogged() === true)
-  return (<Redirect to="/" />)
 
   return (
     <Container component="main" maxWidth="xs">
