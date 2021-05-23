@@ -11,7 +11,6 @@ export default () => [
       path: '/',
       exact: true,
       component: Application,
-      loading: 'Custom loading for home page...',
       error: 'Custom error for home page',
       meta: {
         authOnly: false,

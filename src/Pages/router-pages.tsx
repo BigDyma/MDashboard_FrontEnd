@@ -4,21 +4,21 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { GuardProvider, GuardedRoute } from 'react-router-guards';
 import requireLogin from '../Services/Guard/_requireLogin';
 import getRoutes from '../Services/Guard/_routes';
+// delete this
+import Application from './Dashboard/Home';
+import Profile from './Dashboard/Profile';
 
 const GUARDS = [requireLogin];
 
 const RouterPages = ({children}:any): JSX.Element => 
   { 
     const routes = useMemo(() => getRoutes(), []);
-    return ( 
+    return (  
     <BrowserRouter>
-    <GuardProvider guards={GUARDS} >
-    <Route
-          render={routeProps =>
-            children(
-              <Switch>
-                {routes.map(({ component, error, exact, ignoreGlobal, loading, meta, path }, i) => (
-                  <GuardedRoute
+        <GuardProvider guards={GUARDS} >
+         <Switch>
+            { routes.map(({ component, error, exact, ignoreGlobal, meta, path }, i) => (
+                <GuardedRoute
                     key={i}
                     component={component}
                     exact={exact}
@@ -28,12 +28,8 @@ const RouterPages = ({children}:any): JSX.Element =>
                     path={path}
                   />
                 ))} 
-              </Switch>,
-              routeProps,
-            )
-          }
-        />
-    </GuardProvider>
+          </Switch>
+        </GuardProvider>
     </BrowserRouter>
     )}
 

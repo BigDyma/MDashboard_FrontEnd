@@ -4,7 +4,6 @@ import DashboardLayout from '../../../Components/DashboardLayout';
 
 
 export default function Application():JSX.Element {
-
   return (
     <DashboardLayout>
       <p> this is /</p>

@@ -11,7 +11,7 @@ export default function DashboardLayout(props: {children: React.ReactNode}):JSX.
   const {children} = props;
 
   return (
-    <Dashboard>
+    <Dashboard key='dashboardLayout'>
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>

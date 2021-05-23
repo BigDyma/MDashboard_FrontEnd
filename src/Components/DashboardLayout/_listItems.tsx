@@ -12,25 +12,25 @@ import {Link} from 'react-router-dom';
 
 export const mainListItems = (
   <div>
-    <ListItem button component={Link} to="/Dashboard">
+    <ListItem key="dashboard" id="dashboard" button component={Link} to="/Dashboard">
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
       <ListItemText primary="Dashboard" />
     </ListItem>
-    <ListItem button component={Link} to="/Projects">
+    <ListItem key="projects" id="projects" button component={Link} to="/Projects">
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
       <ListItemText primary="Projects" />
     </ListItem>
-    <ListItem button component={Link} to="/Reports">
+    <ListItem key="reports" id="reports" button component={Link} to="/Reports">
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
       <ListItemText primary="Reports" />
     </ListItem>
-    <ListItem button component={Link} to="/Profile">
+    <ListItem key="profile" id="profile" button component={Link} to="/Profile">
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
