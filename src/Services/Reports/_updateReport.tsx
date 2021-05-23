@@ -3,7 +3,7 @@ import {throwIfError} from '../Helpers/throwCustomException';
 import {IReportUpdate } from '../../Models/reportModels'
 
 const updateReport = async (reportUpdate: IReportUpdate):Promise<boolean> => {
-    const result = await api().put('/Users/', reportUpdate);
+    const result = await api().put('/Report/', reportUpdate);
 
     throwIfError(result);
 

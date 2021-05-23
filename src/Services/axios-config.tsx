@@ -25,6 +25,8 @@ instance.interceptors.request.use( (config) => {
     return config;
   });
 
+
+// middleware to parse response and return custom JSO if there was an error.
 instance.interceptors.response.use((response:AxiosResponse) => JSON.parse(response.data),
                                     (reason: AxiosError) => {
                                         ([401, 403].indexOf(reason.response!.status) !== -1) && logout();

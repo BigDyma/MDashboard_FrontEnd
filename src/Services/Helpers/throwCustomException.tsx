@@ -13,7 +13,7 @@ export const throwCustomException = (handledResult: IJWToken):void  => {
     }
 }
 
-export const throwIfError = (handledResult: IJWToken):void =>{
+export const throwIfError = (handledResult: IErrorResponse):void =>{
     if (handledResult?.error) {
         throw new Error(handledResult.error);
       }
