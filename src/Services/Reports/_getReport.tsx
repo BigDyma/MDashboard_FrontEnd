@@ -3,13 +3,11 @@ import {throwIfError} from '../Helpers/throwCustomException';
 import {IReportResponse} from '../../Models/reportModels';
 import IErrorResponse from '../../Models/errorModels';
 
-
-const getUserReports = async (id:number):Promise<IReportResponse | IErrorResponse> => {
-    const result = await api().get<IReportResponse | IErrorResponse>(`/Users/${id}/reports`);
-    
+const getReport = async (id:number):Promise<IReportResponse | IErrorResponse> => {
+    const result = await api().get<IReportResponse | IErrorResponse>(`/Reports/${id}`)
     throwIfError(result);
 
     return result;
 }
 
-export default getUserReports;
+export default getReport;

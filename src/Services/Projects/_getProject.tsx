@@ -3,12 +3,12 @@ import {throwIfError} from '../Helpers/throwCustomException';
 import {IProjectResponse} from '../../Models/projectsModels';
 import IErrorResponse from '../../Models/errorModels';
 
-
-const getUserProjects = async (id:number):Promise<IProjectResponse | IErrorResponse> => {
-    const result = await api().get<IProjectResponse | IErrorResponse>(`/Users/${id}/projects`)
+const getProject = async (id:number):Promise<IProjectResponse | IErrorResponse> => {
+    const result = await api().get<IProjectResponse | IErrorResponse>(`/Projects/${id}`)
     throwIfError(result);
 
-    return result;
+    return  result.data;
+    
 }
 
-export default getUserProjects;
+export default getProject;

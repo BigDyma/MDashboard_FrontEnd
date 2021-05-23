@@ -1,5 +1,6 @@
 import { IJWToken } from "../../Models/authModels";
 import userSubjectBehavior from '../Auth/Login/_userSubject';
+import IErrorResponse from '../../Models/errorModels';
 
 export const throwCustomException = (handledResult: IJWToken):void  => {
     if (handledResult.error) {
