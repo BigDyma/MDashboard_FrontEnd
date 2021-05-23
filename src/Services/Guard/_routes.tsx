@@ -1,13 +1,13 @@
 import SignUp from "../../Pages/SignUp";
 import SignIn from "../../Pages/SignIn";
 import NotFound from "../../Pages/NotFound";
-import Home from "../../Pages/Home";
+import Application from "../../Pages/Dashboard";
 
 export default () => [
     {
       path: '/',
       exact: true,
-      component: Home,
+      component: Application ,
       loading: 'Custom loading for home page...',
       error: 'Custom error for home page',
       meta: {

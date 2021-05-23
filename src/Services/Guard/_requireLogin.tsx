@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 import { GuardToRoute, GuardFunctionRouteProps, Next } from "react-router-guards/dist/types";
 import isLogged from "../Auth/Login/_isLogged";
-import {getRoles} from '../Auth/SessionParser';
+import {isAdmin} from '../Auth/SessionParser';
 
 const requireLogin = (to: GuardToRoute, from: GuardFunctionRouteProps | null, next: Next):void => {
     if (to.meta.authOnly && !isLogged()) {
@@ -10,7 +10,7 @@ const requireLogin = (to: GuardToRoute, from: GuardFunctionRouteProps | null, ne
     if (to.meta.noAuth && isLogged()){
       next.redirect("/");
     }
-    if (to.meta.adminOnly && getRoles() !== 'admin'){
+    if (to.meta.adminOnly && isAdmin()){
       next.redirect('/');
     }
     next();
