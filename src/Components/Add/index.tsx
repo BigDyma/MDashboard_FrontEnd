@@ -6,9 +6,9 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-import AddIcon from '@material-ui/icons/Add';
-import { Link } from "react-router-dom";
-import CustomPaginationActionsTable from '../Table'
+import SaveIcon from '@material-ui/icons/Save';
+import newProject from './_newProject'
+import newReport from './_newReport'
 
 const useStyles = makeStyles((theme) => ({
   submit: {
@@ -22,30 +22,43 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Reports() {
+const chooseComponent = (variant: string):JSX.Element => {
+    if (variant === "report")
+        return newReport();
+    if (variant === "project")
+        return newProject();
+    return <></>
+}
+
+export default function Add(props: {title:string, variant: string}):JSX.Element {
   const classes = useStyles();
+
+  const {title, variant} = props;
+  
+  const variantComponent = chooseComponent(variant);
+
 
   return (
       <Container>
         <Container maxWidth="sm">
           <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
-            My Reports
+            {title}
           </Typography>
         </Container>
         <Container >
-        <CustomPaginationActionsTable />
+          <Grid container spacing={3} >
+              {variantComponent}
+          </Grid>
         </Container>
         <Box textAlign='center' >
            <Button
-                component={Link}
-                to="/Reports/add"
                 type="submit"
                 variant="contained"
                 color="primary"
-                startIcon={<AddIcon />}
+                startIcon={<SaveIcon />}
                 className={classes.submit}
               >
-                Add Report
+                Save
           </Button>
           </Box >
         </ Container>

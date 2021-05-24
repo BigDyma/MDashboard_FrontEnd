@@ -8,6 +8,7 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import AddIcon from '@material-ui/icons/Add';
 import { Link } from "react-router-dom";
+import CustomPaginationActionsTable from '../Table'
 
 const useStyles = makeStyles((theme) => ({
   submit: {
@@ -32,7 +33,7 @@ export default function Projects() {
           </Typography>
         </Container>
         <Container >
-          <Grid container spacing={3} /> 
+          <CustomPaginationActionsTable />
         </Container>
         <Box textAlign='center' >
            <Button

@@ -5,6 +5,8 @@ import Application from "../../Pages/Dashboard/Home";
 import Projects from '../../Pages/Dashboard/Projects';
 import Reports from '../../Pages/Dashboard/Reports';
 import Profile from '../../Pages/Dashboard/Profile';
+import ProjectAdd from '../../Pages/Dashboard/Projects/Add';
+import ReportAdd from '../../Pages/Dashboard/Reports/Add';
 
 export default () => [
     {
@@ -66,6 +68,22 @@ export default () => [
       component: Projects,
       meta: {
         adminOnly: false // @ set to true
+      }
+    },
+    {
+      path:'/Projects/add',
+      exact: true,
+      component: ProjectAdd,
+      meta: {
+        authOnly: false // @ set to true
+      }
+    },
+    {
+      path:'/Reports/add',
+      exact: true,
+      component: ReportAdd,
+      meta: {
+        authOnly: false // @ set to true
       }
     },
     {
