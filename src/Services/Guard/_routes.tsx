@@ -98,7 +98,7 @@ export default () => [
     {
       path:'/Projects/:id',
       exact: true,
-      component: ReportAdd,
+      component: Reports,
       meta: {
         authOnly: false // @ set to true
       }
