@@ -7,6 +7,7 @@ import Reports from '../../Pages/Dashboard/Reports';
 import Profile from '../../Pages/Dashboard/Profile';
 import ProjectAdd from '../../Pages/Dashboard/Projects/Add';
 import ReportAdd from '../../Pages/Dashboard/Reports/Add';
+import ViewReport from '../../Pages/Dashboard/ViewReport';
 
 export default () => [
     {
@@ -80,6 +81,22 @@ export default () => [
     },
     {
       path:'/Reports/add',
+      exact: true,
+      component: ReportAdd,
+      meta: {
+        authOnly: false // @ set to true
+      }
+    },
+    {
+      path:'/Reports/:id',
+      exact: true,
+      component: ViewReport,
+      meta: {
+        authOnly: false // @ set to true
+      }
+    },
+    {
+      path:'/Projects/:id',
       exact: true,
       component: ReportAdd,
       meta: {

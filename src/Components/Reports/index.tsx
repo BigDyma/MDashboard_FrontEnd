@@ -33,7 +33,7 @@ export default function Reports() {
           </Typography>
         </Container>
         <Container >
-        <CustomPaginationActionsTable />
+        <CustomPaginationActionsTable to="Reports" />
         </Container>
         <Box textAlign='center' >
            <Button

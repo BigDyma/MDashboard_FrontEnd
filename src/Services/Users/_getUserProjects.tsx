@@ -4,11 +4,11 @@ import {IProjectResponse} from '../../Models/projectsModels';
 import IErrorResponse from '../../Models/errorModels';
 
 
-const getUserProjects = async (id:number):Promise<IProjectResponse | IErrorResponse> => {
-    const result = await api().get<IProjectResponse | IErrorResponse>(`/Users/${id}/projects`)
+const getUserProjects = async (id:number):Promise<IProjectResponse[] | IErrorResponse> => {
+    const result = await api().get<IProjectResponse[] | IErrorResponse>(`/Users/${id}/projects`)
     throwIfError(result);
 
-    return result;
+    return result.data;
 }
 
 export default getUserProjects;

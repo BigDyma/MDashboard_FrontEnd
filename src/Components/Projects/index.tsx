@@ -33,7 +33,7 @@ export default function Projects() {
           </Typography>
         </Container>
         <Container >
-          <CustomPaginationActionsTable />
+          <CustomPaginationActionsTable to="Projects" />
         </Container>
         <Box textAlign='center' >
            <Button
