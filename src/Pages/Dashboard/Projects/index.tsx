@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 
 import React from 'react';
 import { Grid, Paper } from '@material-ui/core';
@@ -10,7 +11,7 @@ export default function Projects():JSX.Element {
     <DashboardLayout>
       <Grid item xs={12} md={8} lg={10}>
         <Paper>
-          <ProjectsLayout />
+            <ProjectsLayout />
         </Paper>
       </Grid>
     </DashboardLayout>
