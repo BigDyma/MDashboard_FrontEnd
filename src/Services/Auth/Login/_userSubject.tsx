@@ -1,22 +1,20 @@
-import { BehaviorSubject } from 'rxjs';
-
 const userSubject = {
-  currentUserSubject: new BehaviorSubject(
-    JSON.parse(localStorage.getItem('token') || '{}')
-  )
+  currentUserSubject: {
+    value: JSON.parse(localStorage.getItem('token') || '{}')
+  }
 };
 
 const userSubjectBehavior = {
-  currentUserValue(): any {
+  currentUserValue(): string {
     return userSubject.currentUserSubject.value;
   },
   createUserSubject(token: string): void {
     localStorage.setItem('token', JSON.stringify(token));
-    userSubject.currentUserSubject.next(token);
+    userSubject.currentUserSubject.value = token;
   },
   removeUserSubject(): void {
     localStorage.removeItem('token');
-    userSubject.currentUserSubject.next(null);
+    userSubject.currentUserSubject.value = null;
   }
 };
 export default userSubjectBehavior;

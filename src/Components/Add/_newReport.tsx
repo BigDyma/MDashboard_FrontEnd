@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Field } from 'formik';
-import { TextField } from 'formik-material-ui';
+import { TextField, Select } from 'formik-material-ui';
 import Grid from '@material-ui/core/Grid';
 import {
   InputLabel,
   MenuItem,
-  Select,
   FormControl,
   makeStyles,
   Theme,
@@ -14,6 +13,8 @@ import {
 import { getUserReports, getUserProjects } from '../../Services/Users';
 import { getUserId } from '../../Services/Auth/SessionParser';
 import { IProjectResponse } from '../../Models/projectsModels';
+import getUser from '../../Services/Users/_getUser';
+import { getAllProjects } from '../../Services/Projects';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -26,33 +27,28 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-// @TO-DO get all projects names
-
-const getAllProjects = async (userId: number) => {
-  try {
-    console.log(userId);
-    const projects = await getUserProjects(userId);
-    return projects;
-  } catch (e) {
-    console.log(e);
-  }
-
-  return [{ Name: '', Id: -1 }];
-};
-
 export default function newProject(): JSX.Element {
   const classes = useStyles();
+  // states
   const [projects, setProjects] = useState<IProjectResponse[]>([
-    { Id: -1, Name: '' }
+    { id: -1, name: '' }
   ]);
-  const [userId, setUserId] = useState(0);
+  const [selectedProject, setSelectedProject] = useState<IProjectResponse>();
 
+  // handle selected project
+  const handleSelectChange = (event: React.ChangeEvent<{ value: unknown }>) => {
+    setSelectedProject(event.target.value as IProjectResponse);
+  };
+
+  // get all projects
   useEffect(() => {
-    setUserId(getUserId());
-    getAllProjects(userId).then((v) => setProjects(v as IProjectResponse[]));
+    console.log(getUserId(), 'd');
+    getAllProjects(getUserId()).then((v) =>
+      setProjects(v as IProjectResponse[])
+    );
+    console.log(projects);
   }, []);
 
-  console.log(projects);
   return (
     <>
       <Grid item xs sm={4}>
@@ -61,21 +57,21 @@ export default function newProject(): JSX.Element {
           variant="outlined"
           className={classes.formControl}
         >
-          <InputLabel id="demo-simple-select-outlined-label">Age</InputLabel>
+          <InputLabel id="demo-simple-select-outlined-label">
+            Project
+          </InputLabel>
           <Field
             component={Select}
             name="projectName"
             labelId="demo-simple-select-outlined-label"
-            id="demo-simple-select-outlined"
-            value={1}
+            id="demo-simple-select-outlined projectName"
+            value={selectedProject}
             label="Project"
+            onChange={handleSelectChange}
           >
-            <MenuItem value="None">
-              <em>None</em>
-            </MenuItem>
-            {projects?.map((val: IProjectResponse, i) => (
-              <MenuItem key={val.Id} value={val.Id}>
-                {val.Name}
+            {projects.map((val: IProjectResponse, i) => (
+              <MenuItem key={val.id} value={val.id}>
+                {val.name}
               </MenuItem>
             ))}
           </Field>

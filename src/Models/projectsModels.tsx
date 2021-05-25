@@ -1,17 +1,17 @@
 import * as Yup from 'yup';
 
 export interface IProjectResponse {
-    Id: number;
-    Name: string;
+  id: number;
+  name: string;
 }
 
 export interface IProjectCreate {
-    UserId: number;
-    Name: string;
+  UserId: number;
+  Name: string;
 }
 
 export type IProjectUpdate = IProjectResponse;
 
 export const ProjectSchema = Yup.object().shape({
-    projectName: Yup.string().required("You should enter project name")
+  projectName: Yup.string().required('You should enter project name')
 });

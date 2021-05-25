@@ -24,6 +24,8 @@ export default function ProjectsAdd(): JSX.Element {
             initialValues={{ projectName: 0, reportName: '', reportLink: '' }}
             onSubmit={async (values) => {
               try {
+                console.log(values);
+                // @TODO find why select values are not sent to formik
                 await createReport({
                   Name: values.reportName,
                   Link: values.reportLink,

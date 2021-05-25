@@ -13,7 +13,7 @@ const getUserProjects = async (
   console.log(result, id);
   throwIfError(result);
 
-  return result.data;
+  return result;
 };
 
 export default getUserProjects;

@@ -1,13 +1,13 @@
 export interface IUserResponse {
-    FullName: string;
-    UserName: string;
-    Email: string;
-    Phone: string;
-    DOB: Date;
+  fullName: string;
+  userName: string;
+  email: string;
+  phone: string;
+  dob?: Date;
 }
 
 export interface IUserUpdate {
-    Id?: number;
-    UserName: string;
-    Password: string;
+  Id?: number;
+  UserName: string;
+  Password: string;
 }

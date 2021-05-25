@@ -9,10 +9,10 @@ const AuthenticationMethodClaim =
 const RolesClaim =
   'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
 
-const jwtToken = authHeader().Authorization;
+const getJwtToken = () => authHeader().Authorization;
 
 const parseJWT = (param: string): string =>
-  JSON.parse(atob(jwtToken.split('.')[1]))[param];
+  JSON.parse(atob(getJwtToken().split('.')[1]))[param];
 
 export const getUserName = (): string => parseJWT(UserNameClaim);
 
@@ -22,7 +22,7 @@ export const getAuthMethod = (): string => parseJWT(AuthenticationMethodClaim);
 
 export const getRoles = (): string => parseJWT(RolesClaim);
 
-export const getRawToken = (): string => jwtToken;
+export const getRawToken = (): string => getJwtToken();
 
 export const isAdmin = (): boolean => getRoles().indexOf('Admin') > -1;
 

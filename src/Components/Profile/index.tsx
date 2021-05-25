@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -7,6 +7,11 @@ import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import SaveIcon from '@material-ui/icons/Save';
+import { getUserId } from '../../Services/Auth/SessionParser';
+import { IProjectResponse } from '../../Models/projectsModels';
+import getUser from '../../Services/Users/_getUser';
+import { getUserProps } from '../../Services/Users';
+import { IUserResponse } from '../../Models/userModels';
 
 const useStyles = makeStyles((theme) => ({
   submit: {
@@ -22,6 +27,18 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Profile() {
   const classes = useStyles();
+
+  const [user, setUser] = useState<IUserResponse>({
+    fullName: '',
+    userName: '',
+    email: '',
+    phone: ''
+  });
+
+  useEffect(() => {
+    console.log(getUserId(), 'd');
+    getUserProps(getUserId()).then((v) => setUser(v as IUserResponse));
+  }, []);
 
   return (
     <Container>
@@ -42,7 +59,8 @@ export default function Profile() {
               autoComplete="fname"
               name="firstName"
               variant="outlined"
-              required
+              disabled
+              value={user.fullName}
               fullWidth
               id="firstName"
               label="First Name"
@@ -52,34 +70,25 @@ export default function Profile() {
           <Grid item xs sm={4}>
             <TextField
               variant="outlined"
-              required
+              disabled
+              value={user.email}
               fullWidth
-              id="lastName"
-              label="Last Name"
-              name="lastName"
-              autoComplete="lname"
+              id="email"
+              label="Email"
+              name="email"
+              autoComplete="email"
             />
           </Grid>
           <Grid item xs sm={4}>
             <TextField
               variant="outlined"
-              required
+              disabled
+              value={user.userName}
               fullWidth
-              id="lastName"
-              label="Last Name"
-              name="lastName"
-              autoComplete="lname"
-            />
-          </Grid>
-          <Grid item xs sm={4}>
-            <TextField
-              variant="outlined"
-              required
-              fullWidth
-              id="lastName"
-              label="Last Name"
-              name="lastName"
-              autoComplete="lname"
+              id="userName"
+              label={user.userName}
+              name="userName"
+              autoComplete="userName"
             />
           </Grid>
         </Grid>

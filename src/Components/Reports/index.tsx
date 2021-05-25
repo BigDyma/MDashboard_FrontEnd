@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -7,8 +7,12 @@ import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import AddIcon from '@material-ui/icons/Add';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import CustomPaginationActionsTable from '../Table';
+import { IReportResponse } from '../../Models/reportModels';
+import { getAllReports } from '../../Services/Users';
+import { IProjectResponse } from '../../Models/projectsModels';
+import { getUserId } from '../../Services/Auth/SessionParser';
 
 const useStyles = makeStyles((theme) => ({
   submit: {
@@ -24,6 +28,23 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Reports() {
   const classes = useStyles();
+
+  const [reports, setReports] = useState<IReportResponse[]>([
+    {
+      Id: 0,
+      Name: '',
+      Link: '',
+      CreatedTime: null
+    }
+  ]);
+
+  const history = useHistory();
+
+  useEffect(() => {
+    console.log(getUserId(), 'd');
+    getAllReports(getUserId()).then((v) => setReports(v as IReportResponse[]));
+    console.log(reports);
+  }, []);
 
   return (
     <Container>
