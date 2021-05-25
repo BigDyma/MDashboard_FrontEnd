@@ -5,23 +5,24 @@ import Copyright from '../Footer';
 import useStyles from './_styles';
 import Dashboard from './_dashboard';
 
-
-export default function DashboardLayout(props: {children: React.ReactNode}):JSX.Element {
+export default function DashboardLayout(props: {
+  children: React.ReactNode;
+}): JSX.Element {
   const classes = useStyles();
-  const {children} = props;
+  const { children } = props;
 
   return (
-    <Dashboard key='dashboardLayout'>
+    <Dashboard key="dashboardLayout">
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3} />
-            {children}
+          {children}
           <Box pt={4}>
             <Copyright />
           </Box>
         </Container>
-       </main>
+      </main>
     </Dashboard>
   );
 }

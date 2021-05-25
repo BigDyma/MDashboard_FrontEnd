@@ -6,21 +6,21 @@ import isLogged from './_isLogged';
 import userSubjectBehavior from './_userSubject';
 import authHeader from '../../Helpers/authHeader';
 import api from '../../axios-config';
-import {throwCustomException} from '../../Helpers/throwCustomException';
+import { throwCustomException } from '../../Helpers/throwCustomException';
 
 export const logout = async () => {
-  if (isLogged()) {
-    const res = await api().post(`/Auth/logout`);
-    userSubjectBehavior.removeUserSubject();
-    window.location.reload();
-  }
-}
+  // const res = await api().post(`/Auth/logout`);
+  userSubjectBehavior.removeUserSubject();
+  // window.location.reload();
+};
 
-export const login = async(values:ILogin):Promise<any> => {
+export const login = async (values: ILogin): Promise<any> => {
+  const result = await api().post<IJWToken>(`/Auth/login`, values);
+  console.log(result);
 
-    const result = await api().post(`/Auth/login`, values);
-    throwCustomException(result);
-    
-  }
-  
+  throwCustomException(result);
 
+  const { token } = (result as IJWToken) || '';
+
+  userSubjectBehavior.createUserSubject(token as string);
+};

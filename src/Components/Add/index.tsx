@@ -39,28 +39,28 @@ export default function Add(props: {title:string, variant: string}):JSX.Element 
 
 
   return (
+    <Container>
+      <Container maxWidth="sm">
+        <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
+          {title}
+        </Typography>
+      </Container>
       <Container>
-        <Container maxWidth="sm">
-          <Typography variant="h4" align="center" color="textPrimary" gutterBottom>
-            {title}
-          </Typography>
-        </Container>
-        <Container >
-          <Grid container spacing={3} >
-              {variantComponent}
-          </Grid>
-        </Container>
-        <Box textAlign='center' >
-           <Button
-                type="submit"
-                variant="contained"
-                color="primary"
-                startIcon={<SaveIcon />}
-                className={classes.submit}
-              >
-                Save
-          </Button>
-          </Box >
-        </ Container>
+        <Grid container spacing={3}>
+          {variantComponent}
+        </Grid>
+      </Container>
+      <Box textAlign='center'>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          startIcon={<SaveIcon />}
+          className={classes.submit}
+        >
+          Save
+        </Button>
+      </Box>
+    </Container>
   );
 }

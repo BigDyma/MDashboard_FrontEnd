@@ -1,14 +1,15 @@
-import api from '../axios-config'
-import {throwIfError} from '../Helpers/throwCustomException';
-import {IProjectCreate} from '../../Models/projectsModels';
+import api from '../axios-config';
+import { throwIfError } from '../Helpers/throwCustomException';
+import { IProjectCreate } from '../../Models/projectsModels';
 
-const createProject = async (projectUpdate:IProjectCreate):Promise<boolean> => {
-    const result = await api().put(`/Projects/`, projectUpdate);
+const createProject = async (
+  projectCreate: IProjectCreate
+): Promise<boolean> => {
+  const result = await api().post(`/Projects/add`, projectCreate);
 
-    throwIfError(result);
+  throwIfError(result);
 
-    return  result.status === 200; 
-    
-}
+  return result.status === 200;
+};
 
 export default createProject;

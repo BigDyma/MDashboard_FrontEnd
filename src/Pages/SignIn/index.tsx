@@ -14,8 +14,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { Formik, Field, Form } from 'formik';
-import {  useSnackbar } from 'notistack';
-import {Redirect, useHistory} from "react-router-dom";
+import { useSnackbar } from 'notistack';
+import { Redirect, useHistory } from 'react-router-dom';
 import { authSchema } from '../../Models/authModels';
 import { login } from '../../Services/Auth/Login';
 import isLogged from '../../Services/Auth/Login/_isLogged';
@@ -46,13 +46,13 @@ const SignIn = function (): JSX.Element {
             // empty
             try {
               await login(values);
-              history.push('/'); 
+              history.push('/');
             } catch (e) {
+              console.log(e);
               enqueueSnackbar(e.toString(), {
                 variant: 'error'
               });
             }
-
           }}
         >
           {(props) => (
