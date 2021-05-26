@@ -17,4 +17,5 @@ const userSubjectBehavior = {
     userSubject.currentUserSubject.value = null;
   }
 };
+
 export default userSubjectBehavior;

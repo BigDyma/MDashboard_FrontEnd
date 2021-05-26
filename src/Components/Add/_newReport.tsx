@@ -63,17 +63,21 @@ export default function newProject(): JSX.Element {
           <Field
             component={Select}
             name="projectName"
-            labelId="demo-simple-select-outlined-label"
+            labelId="projectName"
             id="demo-simple-select-outlined projectName"
             value={selectedProject}
             label="Project"
             onChange={handleSelectChange}
           >
-            {projects.map((val: IProjectResponse, i) => (
-              <MenuItem key={val.id} value={val.id}>
-                {val.name}
-              </MenuItem>
-            ))}
+            {projects.length ? (
+              projects.map((val: IProjectResponse, i) => (
+                <MenuItem key={val.id} value={val.id}>
+                  {val.name}
+                </MenuItem>
+              ))
+            ) : (
+              <MenuItem>Loading...</MenuItem>
+            )}
           </Field>
         </FormControl>
       </Grid>

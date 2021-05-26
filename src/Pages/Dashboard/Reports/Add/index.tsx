@@ -21,7 +21,11 @@ export default function ProjectsAdd(): JSX.Element {
         <Paper>
           <Formik
             validationSchema={NewReportSchema}
-            initialValues={{ projectName: 0, reportName: '', reportLink: '' }}
+            initialValues={{
+              projectName: 0,
+              reportName: '',
+              reportLink: ''
+            }}
             onSubmit={async (values) => {
               try {
                 console.log(values);
@@ -29,7 +33,7 @@ export default function ProjectsAdd(): JSX.Element {
                 await createReport({
                   Name: values.reportName,
                   Link: values.reportLink,
-                  ProjectId: values.projectName
+                  ProjectId: values.projectName || 0
                 });
                 history.push('/Reports');
                 enqueueSnackbar('New Report was created!', {

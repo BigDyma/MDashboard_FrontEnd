@@ -1,10 +1,10 @@
 import * as Yup from 'yup';
 
 export interface IReportResponse {
-  Id: number;
-  Name: string;
-  Link: string;
-  CreatedTime: Date | null;
+  id: number;
+  name: string;
+  link: string;
+  createdTime: Date | null;
 }
 
 export interface IReportCreate {
