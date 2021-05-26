@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import SaveIcon from '@material-ui/icons/Save';
+import { Field } from 'formik';
+import { TextField } from 'formik-material-ui';
+import { TextField as MaterialTextField } from '@material-ui/core';
 import { getUserId } from '../../Services/Auth/SessionParser';
 import { IProjectResponse } from '../../Models/projectsModels';
 import getUser from '../../Services/Users/_getUser';
@@ -55,9 +57,8 @@ export default function Profile() {
       <Container>
         <Grid container spacing={3}>
           <Grid item xs sm={4}>
-            <TextField
+            <MaterialTextField
               autoComplete="fname"
-              name="firstName"
               variant="outlined"
               disabled
               value={user.fullName}
@@ -68,7 +69,7 @@ export default function Profile() {
             />
           </Grid>
           <Grid item xs sm={4}>
-            <TextField
+            <MaterialTextField
               variant="outlined"
               disabled
               value={user.email}
@@ -80,15 +81,14 @@ export default function Profile() {
             />
           </Grid>
           <Grid item xs sm={4}>
-            <TextField
+            <Field
+              component={TextField}
               variant="outlined"
-              disabled
-              value={user.userName}
               fullWidth
               id="userName"
               label={user.userName}
               name="userName"
-              autoComplete="userName"
+              autoComplete={user.userName}
             />
           </Grid>
         </Grid>

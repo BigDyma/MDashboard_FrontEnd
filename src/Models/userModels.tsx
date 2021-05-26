@@ -1,3 +1,5 @@
+import * as Yup from 'yup';
+
 export interface IUserResponse {
   fullName: string;
   userName: string;
@@ -7,7 +9,14 @@ export interface IUserResponse {
 }
 
 export interface IUserUpdate {
-  Id?: number;
+  Id: number;
   UserName: string;
-  Password: string;
 }
+
+export const UserUpdate = Yup.object().shape({
+  userName: Yup.string().required('Please enter username')
+  // .matches(
+  //   /^.*(?=.{8,})((?=.*[!@#$%^&*()\-_=+{};:,<.>]){1})(?=.*\d)((?=.*[a-z]){1})((?=.*[A-Z]){1}).*$/,
+  //   'Password must contain at least 8 characters, one uppercase, one number and one special case character'
+  // )
+});

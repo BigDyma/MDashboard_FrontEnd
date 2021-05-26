@@ -4,13 +4,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { GuardProvider, GuardedRoute } from 'react-router-guards';
 import requireLogin from '../Services/Guard/_requireLogin';
 import getRoutes from '../Services/Guard/_routes';
-// delete this
-import Application from './Dashboard/Home';
-import Profile from './Dashboard/Profile';
 
 const GUARDS = [requireLogin];
 
-const RouterPages = ({ children }: any): JSX.Element => {
+const RouterPages = (): JSX.Element => {
   const routes = useMemo(() => getRoutes(), []);
   return (
     <BrowserRouter>

@@ -1,13 +1,14 @@
-import api from '../axios-config'
-import {throwIfError} from '../Helpers/throwCustomException';
-import {ILogin } from '../../Models/authModels'
+import api from '../axios-config';
+import { throwIfError } from '../Helpers/throwCustomException';
 
-const updateUser = async (userUpdate: ILogin & {id: number}):Promise<boolean> => {
-    const result = await api().put('/Users/', userUpdate);
+import { IUserUpdate } from '../../Models/userModels';
 
-    throwIfError(result);
+const updateUser = async (userUpdate: IUserUpdate): Promise<boolean> => {
+  const result = await api().put('/Users/', userUpdate);
 
-    return result.status === 200;
-}
+  throwIfError(result);
+
+  return result.status === 200;
+};
 
 export default updateUser;

@@ -9,7 +9,7 @@ const AuthenticationMethodClaim =
 const RolesClaim =
   'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
 
-const getJwtToken = () => authHeader().Authorization;
+const getJwtToken = (): string => authHeader().Authorization;
 
 const parseJWT = (param: string): string =>
   JSON.parse(atob(getJwtToken().split('.')[1]))[param];

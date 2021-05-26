@@ -100,7 +100,7 @@ export default function Projects() {
             columns={columns}
             pageSize={5}
             onCellClick={async (e) => {
-              if (e.field === 'GoTo') history.push(`/Reports/${e.id}`);
+              if (e.field === 'GoTo') history.push(`/Projects/${e.id}`);
               if (e.field === 'Remove') {
                 try {
                   await deleteProject(parseInt(e.id.toString(), 10));

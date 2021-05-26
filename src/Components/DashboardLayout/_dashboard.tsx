@@ -11,16 +11,20 @@ import Badge from '@material-ui/core/Badge';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import RemoveFromQueueSharpIcon from '@material-ui/icons/RemoveFromQueueSharp';
+import { Button } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 import { mainListItems, secondaryListItems } from './_listItems';
 import useStyles from './_styles';
-
+import { logout } from '../../Services/Auth/Login';
 // @TO-DO refactor this in model folder
 type Props = {
-    children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
-export default function Dashboard(props: Props):JSX.Element {
+export default function Dashboard(props: Props): JSX.Element {
   const classes = useStyles();
+  const history = useHistory();
   const [open, setOpen] = React.useState(true);
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -29,35 +33,53 @@ export default function Dashboard(props: Props):JSX.Element {
     setOpen(false);
   };
 
-  const {children} = props;
+  const { children } = props;
 
   return (
     <div className={classes.root}>
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+      <AppBar
+        position="absolute"
+        className={clsx(classes.appBar, open && classes.appBarShift)}
+      >
         <Toolbar className={classes.toolbar}>
           <IconButton
             edge="start"
             color="inherit"
             aria-label="open drawer"
             onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+            className={clsx(
+              classes.menuButton,
+              open && classes.menuButtonHidden
+            )}
           >
             <MenuIcon />
           </IconButton>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+          <Typography
+            component="h1"
+            variant="h6"
+            color="inherit"
+            noWrap
+            className={classes.title}
+          >
             Dashboard
           </Typography>
-          <IconButton color="inherit">
+          <Button
+            color="inherit"
+            onClick={() => {
+              logout();
+              history.push('/');
+            }}
+          >
             <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
+              <RemoveFromQueueSharpIcon />
             </Badge>
-          </IconButton>
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
         variant="permanent"
         classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose)
         }}
         open={open}
       >
