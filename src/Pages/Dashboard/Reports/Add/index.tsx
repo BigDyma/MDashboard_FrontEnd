@@ -33,7 +33,7 @@ export default function ProjectsAdd(): JSX.Element {
                 await createReport({
                   Name: values.reportName,
                   Link: values.reportLink,
-                  ProjectId: values.projectName || 0
+                  ProjectId: values.projectName
                 });
                 history.push('/Reports');
                 enqueueSnackbar('New Report was created!', {

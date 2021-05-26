@@ -15,11 +15,15 @@ import {
   GridValueGetterParams
 } from '@material-ui/data-grid';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import RemoveCircleOutlineOutlinedIcon from '@material-ui/icons/RemoveCircleOutlineOutlined';
+import { useSnackbar } from 'notistack';
 import CustomPaginationActionsTable from '../Table';
 import { IReportResponse } from '../../Models/reportModels';
 import { getAllReports } from '../../Services/Users';
 import { IProjectResponse } from '../../Models/projectsModels';
 import { getUserId } from '../../Services/Auth/SessionParser';
+import { getProjectsReports } from '../../Services/Projects';
+import deleteReport from '../../Services/Reports/_deleteReport';
 
 const useStyles = makeStyles((theme) => ({
   submit: {
@@ -35,22 +39,32 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Reports() {
   const classes = useStyles();
-
+  const { enqueueSnackbar } = useSnackbar();
   const [reports, setReports] = useState<IReportResponse[]>([
     {
       id: 0,
-      name: '',
-      link: '',
+      name: 'loading',
+      link: 'no link',
       createdTime: null
     }
   ]);
 
   const history = useHistory();
 
+  const pageType = window.location.pathname;
+
   useEffect(() => {
     console.log(getUserId(), 'd');
-    getAllReports(getUserId()).then((v) => setReports(v as IReportResponse[]));
-    console.log(reports);
+    if (pageType.includes('/Reports')) {
+      getAllReports(getUserId()).then((v) =>
+        setReports(v as IReportResponse[])
+      );
+    } else {
+      getProjectsReports(parseInt(pageType[pageType.length - 1], 10)).then(
+        (v) => setReports(v as IReportResponse[])
+      );
+      console.log(reports);
+    }
   }, []);
 
   const columns: GridColDef[] = [
@@ -58,13 +72,24 @@ export default function Reports() {
     { field: 'name', headerName: 'Project Name', width: 150 },
     { field: 'reports', headerName: 'Reports', width: 180 },
     {
-      field: ' ',
+      field: 'GoTo',
       headerName: '',
       width: 180,
       // eslint-disable-next-line react/display-name
       renderCell: (params: GridValueGetterParams) => (
         <IconButton color="primary" aria-label="add an alarm">
           <ArrowForwardIcon />
+        </IconButton>
+      )
+    },
+    {
+      field: 'Remove',
+      headerName: '',
+      width: 180,
+      // eslint-disable-next-line react/display-name
+      renderCell: (params: GridValueGetterParams) => (
+        <IconButton color="primary" aria-label="add an alarm">
+          <RemoveCircleOutlineOutlinedIcon />
         </IconButton>
       )
     }
@@ -84,16 +109,32 @@ export default function Reports() {
       </Container>
       <Container>
         <div style={{ height: 400, width: '100%' }}>
-          {reports.length ? (
-            <DataGrid
-              rows={reports}
-              columns={columns}
-              pageSize={5}
-              onCellClick={(e) => history.push(`Reports/${e.id}`)}
-            />
-          ) : (
-            <Typography variant="h5">Loading...</Typography>
-          )}
+          <DataGrid
+            rows={reports}
+            columns={columns}
+            pageSize={5}
+            onCellClick={async (e) => {
+              if (e.field === 'GoTo') history.push(`/Reports/${e.id}`);
+              if (e.field === 'Remove') {
+                try {
+                  await deleteReport(parseInt(e.id.toString(), 10));
+
+                  reports.filter((x) => x.id.toString() !== e.id.toString());
+                  console.log(reports);
+                  setReports(
+                    reports.filter((x) => x.id.toString() !== e.id.toString())
+                  );
+
+                  enqueueSnackbar('Removed with success', {
+                    variant: 'success'
+                  });
+                } catch (error) {
+                  console.log(error);
+                  enqueueSnackbar(error.toString(), { variant: 'error' });
+                }
+              }
+            }}
+          />
         </div>
       </Container>
       <Box textAlign="center">

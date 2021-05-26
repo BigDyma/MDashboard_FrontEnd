@@ -33,11 +33,11 @@ export default function newProject(): JSX.Element {
   const [projects, setProjects] = useState<IProjectResponse[]>([
     { id: -1, name: '' }
   ]);
-  const [selectedProject, setSelectedProject] = useState<IProjectResponse>();
+  const [selectedProject, setSelectedProject] = useState<number>();
 
   // handle selected project
   const handleSelectChange = (event: React.ChangeEvent<{ value: unknown }>) => {
-    setSelectedProject(event.target.value as IProjectResponse);
+    setSelectedProject(event.target.value as number);
   };
 
   // get all projects
@@ -64,15 +64,14 @@ export default function newProject(): JSX.Element {
             component={Select}
             name="projectName"
             labelId="projectName"
-            id="demo-simple-select-outlined projectName"
-            value={selectedProject}
-            label="Project"
-            onChange={handleSelectChange}
+            id="projectName"
+            label="projectName"
+            multiple={false}
           >
             {projects.length ? (
               projects.map((val: IProjectResponse, i) => (
                 <MenuItem key={val.id} value={val.id}>
-                  {val.name}
+                  <option value={val.id}>{val.name}</option>
                 </MenuItem>
               ))
             ) : (

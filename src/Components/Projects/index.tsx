@@ -16,10 +16,12 @@ import {
   GridRowId
 } from '@material-ui/data-grid';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import RemoveCircleOutlineOutlinedIcon from '@material-ui/icons/RemoveCircleOutlineOutlined';
+import { useSnackbar } from 'notistack';
 import CustomPaginationActionsTable from '../Table';
 import { IProjectResponse } from '../../Models/projectsModels';
 import { getUserId } from '../../Services/Auth/SessionParser';
-import { getAllProjects } from '../../Services/Projects';
+import { deleteProject, getAllProjects } from '../../Services/Projects';
 
 const useStyles = makeStyles((theme) => ({
   submit: {
@@ -35,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Projects() {
   const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
 
   const [projects, setProjects] = useState<IProjectResponse[]>([
     { id: 0, name: '' }
@@ -55,13 +58,24 @@ export default function Projects() {
     { field: 'name', headerName: 'Project Name', width: 150 },
     { field: 'reports', headerName: 'Reports', width: 180 },
     {
-      field: ' ',
+      field: 'GoTo',
       headerName: '',
       width: 180,
       // eslint-disable-next-line react/display-name
       renderCell: (params: GridValueGetterParams) => (
         <IconButton color="primary" aria-label="add an alarm">
           <ArrowForwardIcon />
+        </IconButton>
+      )
+    },
+    {
+      field: 'Remove',
+      headerName: '',
+      width: 180,
+      // eslint-disable-next-line react/display-name
+      renderCell: (params: GridValueGetterParams) => (
+        <IconButton color="primary" aria-label="add an alarm">
+          <RemoveCircleOutlineOutlinedIcon />
         </IconButton>
       )
     }
@@ -85,7 +99,28 @@ export default function Projects() {
             rows={projects}
             columns={columns}
             pageSize={5}
-            onCellClick={(e) => history.push(`Projects/${e.id}`)}
+            onCellClick={async (e) => {
+              if (e.field === 'GoTo') history.push(`/Reports/${e.id}`);
+              if (e.field === 'Remove') {
+                try {
+                  await deleteProject(parseInt(e.id.toString(), 10));
+
+                  projects.filter((x) => x.id.toString() !== e.id.toString());
+                  console.log(projects);
+
+                  setProjects(
+                    projects.filter((x) => x.id.toString() !== e.id.toString())
+                  );
+
+                  enqueueSnackbar('Removed with success', {
+                    variant: 'success'
+                  });
+                } catch (error) {
+                  console.log(error);
+                  enqueueSnackbar(error.toString(), { variant: 'error' });
+                }
+              }
+            }}
           />
         </div>
       </Container>
