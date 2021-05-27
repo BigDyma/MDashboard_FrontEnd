@@ -24,11 +24,9 @@ export default function DataGridDemo(props: { to: string }) {
   const history = useHistory();
 
   useEffect(() => {
-    console.log(getUserId(), 'd');
     getAllProjects(getUserId()).then((v) =>
       setProjects(v as IProjectResponse[])
     );
-    console.log(projects);
   }, []);
 
   const columns: GridColDef[] = [
@@ -55,7 +53,6 @@ export default function DataGridDemo(props: { to: string }) {
         columns={columns}
         pageSize={5}
         onCellClick={(e) => {
-          console.log(e);
           if (e.field === 'Go To') return history.push(`${to}/${e.id}`);
           return null;
         }}

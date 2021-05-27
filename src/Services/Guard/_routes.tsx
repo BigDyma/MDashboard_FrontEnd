@@ -8,6 +8,7 @@ import Profile from '../../Pages/Dashboard/Profile';
 import ProjectAdd from '../../Pages/Dashboard/Projects/Add';
 import ReportAdd from '../../Pages/Dashboard/Reports/Add';
 import ViewReport from '../../Pages/Dashboard/ViewReport';
+import Subscription from '../../Pages/Dashboard/Subscription';
 
 export default () => [
   {
@@ -102,6 +103,14 @@ export default () => [
     path: '/Projects/:id',
     exact: true,
     component: Reports,
+    meta: {
+      authOnly: true // @ set to true
+    }
+  },
+  {
+    path: '/Subscription',
+    exact: true,
+    component: Subscription,
     meta: {
       authOnly: true // @ set to true
     }

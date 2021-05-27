@@ -46,11 +46,9 @@ export default function Projects() {
   const history = useHistory();
 
   useEffect(() => {
-    console.log(getUserId(), 'd');
     getAllProjects(getUserId()).then((v) =>
       setProjects(v as IProjectResponse[])
     );
-    console.log(projects);
   }, []);
 
   const columns: GridColDef[] = [
@@ -106,7 +104,6 @@ export default function Projects() {
                   await deleteProject(parseInt(e.id.toString(), 10));
 
                   projects.filter((x) => x.id.toString() !== e.id.toString());
-                  console.log(projects);
 
                   setProjects(
                     projects.filter((x) => x.id.toString() !== e.id.toString())

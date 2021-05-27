@@ -23,7 +23,6 @@ export default function ProjectsAdd(): JSX.Element {
             initialValues={{ projectName: '' }}
             onSubmit={async (values) => {
               try {
-                console.log({ Name: values.projectName, UserId: userId });
                 await createProject({
                   Name: values.projectName,
                   UserId: userId

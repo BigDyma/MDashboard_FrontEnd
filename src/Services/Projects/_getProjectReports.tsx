@@ -10,7 +10,6 @@ const getProjectsReports = async (
     `/Projects/${id}/Reports`
   );
 
-  console.log(result, 'interceptors ');
   throwIfError(result);
 
   return result;

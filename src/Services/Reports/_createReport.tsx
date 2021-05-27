@@ -3,7 +3,6 @@ import { throwIfError } from '../Helpers/throwCustomException';
 import { IReportCreate } from '../../Models/reportModels';
 
 const createReport = async (reportCreate: IReportCreate): Promise<boolean> => {
-  console.log(reportCreate.ProjectId, 'report create prop from api');
   // @TODO refactor this  stupid bug
   const newReportCreate = {
     ProjectId: parseInt(reportCreate.ProjectId.toString(), 10),

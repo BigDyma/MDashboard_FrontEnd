@@ -10,7 +10,6 @@ const getUserProjects = async (
     `/Users/${id}/projects`
   );
 
-  console.log(result, id);
   throwIfError(result);
 
   return result;

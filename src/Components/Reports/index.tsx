@@ -54,7 +54,6 @@ export default function Reports() {
   const pageType = window.location.pathname;
 
   useEffect(() => {
-    console.log(getUserId(), 'd');
     if (pageType.includes('/Reports')) {
       getAllReports(getUserId()).then((v) =>
         setReports(v as IReportResponse[])
@@ -63,7 +62,6 @@ export default function Reports() {
       getProjectsReports(parseInt(pageType[pageType.length - 1], 10)).then(
         (v) => setReports(v as IReportResponse[])
       );
-      console.log(reports);
     }
   }, []);
 
@@ -120,7 +118,6 @@ export default function Reports() {
                   await deleteReport(parseInt(e.id.toString(), 10));
 
                   reports.filter((x) => x.id.toString() !== e.id.toString());
-                  console.log(reports);
                   setReports(
                     reports.filter((x) => x.id.toString() !== e.id.toString())
                   );

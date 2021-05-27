@@ -6,7 +6,6 @@ import IErrorResponse from '../../Models/errorModels';
 const getReport = async (
   id: number
 ): Promise<IReportResponse | IErrorResponse> => {
-  console.log(`requested id${id}`);
   const result = await api().get<IReportResponse | IErrorResponse>(
     `/Report/${id}`
   );

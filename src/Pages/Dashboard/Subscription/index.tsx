@@ -1,15 +1,15 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
 import { Grid, Paper, Typography } from '@material-ui/core';
-// import useStyles from '../../../Components/DashboardLayout/_styles';
+import React from 'react';
 import DashboardLayout from '../../../Components/DashboardLayout';
-import FileUpload from '../../../Components/CsvUpload';
+import StripeContainer from '../../../Components/Stripe';
 
-export default function Application(): JSX.Element {
+export default function Subscription(): JSX.Element {
   return (
     <DashboardLayout>
       <Grid item xs={12} md={8} lg={10}>
         <Paper>
-          <FileUpload />
+          <StripeContainer />
         </Paper>
       </Grid>
     </DashboardLayout>

@@ -16,7 +16,6 @@ export const logout = async () => {
 
 export const login = async (values: ILogin): Promise<any> => {
   const result = await api().post<IJWToken>(`/Auth/login`, values);
-  console.log(result);
 
   throwCustomException(result);
 

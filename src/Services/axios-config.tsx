@@ -27,10 +27,7 @@ const api = (): AxiosInstance => {
 
   // middleware to parse response and return custom JSO if there was an error.
   instance.interceptors.response.use(
-    (response: AxiosResponse) => {
-      console.log(response, 'interceptors result');
-      return response.data;
-    }, // JSON.parse(response.data),
+    (response: AxiosResponse) => response.data, // JSON.parse(response.data),
     (reason: AxiosError) => {
       if ([401, 403].indexOf(reason?.response?.status || 0) !== -1) logout();
       console.log(reason.response?.status);

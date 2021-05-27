@@ -17,14 +17,11 @@ export default function ViewReport(): JSX.Element {
   });
   const id = parseInt(window.location.pathname.split('Reports/')[1], 10);
   useEffect(() => {
-    console.log(window.location.pathname.split('Reports/')[1]);
-    console.log(id, 'd');
     try {
       getReport(id).then((v) => setReport(v as IReportResponse));
     } catch (e) {
       enqueueSnackbar(e.toString(), { variant: 'error' });
     }
-    console.log(report);
   }, []);
 
   return (
